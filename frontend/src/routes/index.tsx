@@ -8,12 +8,21 @@ import { MainLayout } from './layouts/MainLayout';
 import { AuthLayout } from './layouts/AuthLayout';
 import { AuthGuard } from './guards';
 import { WelcomePage } from '@/pages/welcome';
+import { HabitManagementPage } from '@/pages/habitManagement';
 import { NotFoundPage } from '@/pages/notFound';
 
 export const router = (
   <Routes>
     <Route path="/" element={<MainLayout />}>
       <Route index element={<WelcomePage />} />
+      <Route
+        path="habits"
+        element={
+          <AuthGuard>
+            <HabitManagementPage />
+          </AuthGuard>
+        }
+      />
       <Route path="*" element={<NotFoundPage />} />
     </Route>
 

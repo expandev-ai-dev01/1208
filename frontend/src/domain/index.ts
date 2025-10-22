@@ -1,1 +1,4 @@
-// Domain modules will be exported here as they are implemented
+export * from './habit/types';
+export * from './habit/services';
+export * from './habit/hooks';
+export * from './habit/components';

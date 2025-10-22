@@ -6,7 +6,7 @@
  * @category form
  */
 
-import { ButtonHTMLAttributes, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { buttonVariants } from './variants';
 import type { ButtonProps } from './types';
 

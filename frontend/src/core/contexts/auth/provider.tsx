@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }, []);
 
-  const login = useCallback(async (email: string, password: string) => {
+  const login = useCallback(async (email: string) => {
     setIsLoading(true);
     try {
       const mockUser: User = {
