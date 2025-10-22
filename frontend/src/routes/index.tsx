@@ -9,6 +9,7 @@ import { AuthLayout } from './layouts/AuthLayout';
 import { AuthGuard } from './guards';
 import { WelcomePage } from '@/pages/welcome';
 import { HabitManagementPage } from '@/pages/habitManagement';
+import { HabitCompletionPage } from '@/pages/habitCompletion';
 import { NotFoundPage } from '@/pages/notFound';
 
 export const router = (
@@ -20,6 +21,14 @@ export const router = (
         element={
           <AuthGuard>
             <HabitManagementPage />
+          </AuthGuard>
+        }
+      />
+      <Route
+        path="habits/:id/completions"
+        element={
+          <AuthGuard>
+            <HabitCompletionPage />
           </AuthGuard>
         }
       />

@@ -6,9 +6,11 @@
  * @category display
  */
 
+import { useNavigate } from 'react-router-dom';
 import { Card } from '@/core/components/Card';
 import { Button } from '@/core/components/Button';
-import { Edit2, Trash2, Clock } from 'lucide-react';
+import { Edit2, Trash2, Clock, History } from 'lucide-react';
+import { CompletionButton } from '@/domain/habitCompletion/components';
 import type { HabitCardProps } from './types';
 
 const frequencyLabels = {
@@ -18,6 +20,8 @@ const frequencyLabels = {
 };
 
 export const HabitCard = ({ habit, onEdit, onDelete, onToggleStatus }: HabitCardProps) => {
+  const navigate = useNavigate();
+
   const handleDelete = () => {
     if (
       window.confirm('Tem certeza que deseja excluir este hábito? Esta ação não pode ser desfeita.')
@@ -31,9 +35,13 @@ export const HabitCard = ({ habit, onEdit, onDelete, onToggleStatus }: HabitCard
     onToggleStatus(habit.id, newStatus);
   };
 
+  const handleViewHistory = () => {
+    navigate(`/habits/${habit.id}/completions`);
+  };
+
   return (
     <Card padding="medium" className="hover:shadow-md transition-shadow">
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
           <div className="flex items-center space-x-2 mb-2">
             <h3 className="text-lg font-semibold text-gray-900">{habit.name}</h3>
@@ -78,10 +86,24 @@ export const HabitCard = ({ habit, onEdit, onDelete, onToggleStatus }: HabitCard
           >
             <Trash2 className="h-4 w-4" />
           </Button>
+          <Button
+            variant="ghost"
+            size="small"
+            onClick={handleViewHistory}
+            className="!p-2 text-primary-600 hover:bg-primary-50"
+          >
+            <History className="h-4 w-4" />
+          </Button>
         </div>
       </div>
 
-      <div className="mt-4 pt-4 border-t border-gray-200">
+      {habit.status === 'active' && (
+        <div className="mb-3">
+          <CompletionButton habitId={habit.id} habitName={habit.name} variant="default" />
+        </div>
+      )}
+
+      <div className="pt-3 border-t border-gray-200">
         <Button variant="outline" size="small" onClick={handleToggleStatus} fullWidth>
           {habit.status === 'active' ? 'Desativar' : 'Ativar'}
         </Button>

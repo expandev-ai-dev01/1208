@@ -1,6 +1,7 @@
 /**
  * @module services
- * @description Business logic services exports
+ * @summary Business logic services exports
  */
 
 export * from './habit';
+export * from './habitCompletion';
